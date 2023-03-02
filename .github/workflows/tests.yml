@@ -16,4 +16,4 @@ jobs:
         with:
           file_types: .md,yaml,json
           retry_count: 3
-          exclude_patterns: http://IP:NODE_PORT,http://localhost,https://virtserver.swaggerhub.com/,http://IP
+          exclude_patterns: http://IP:NODE_PORT,http://localhost,https://virtserver.swaggerhub.com/,http://IP,http://MATER-IP:5000/
