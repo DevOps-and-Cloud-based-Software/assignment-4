@@ -20,9 +20,9 @@ At the end of this assignment, you (individually) should:
    
   * Write a short report (max 4 pages), which should include a GitHub link containing the created playbooks in YAML format
    
-  * Report the results of the following tasks, e.g., screenshots for each of the steps and/or performance measurement, etc. 
+  * Report the results of the following tasks, e.g., for each of the steps and/or performance measurement, etc. 
     + Install and configure a Docker swarm cluster; 
-    + Stress test a simple Apache server with one and 4 instances and report the results;
+    + Stress test a simple Nginx server with 1,2,4 and 8 instances and report the results;
     
   * Answer all self-study questions
 
@@ -85,8 +85,7 @@ Start a control node t2.micro Ubuntu Linux. Log in the newly created VM run:
 
  **IMPORTANT**
 
- The default username for Ubuntu instances is 'ubuntu'. 
- So the ssh command should look like this 
+ The default username for Ubuntu instances is 'ubuntu'. So the ssh command should look like this 
  ```bash
  ssh ubuntu@ec2-XX-XXX-XXX-XX.compute-1.amazonaws.com -i PRIVATE_KEY.pem 
   ```
@@ -429,9 +428,11 @@ Fill in the tasks in the playbook provided:
 
   * Go to task named 'docker swarm init' and save the output of the 'join_cmd' so it is accessible by the worker
   * Go to task named 'join worker' and on the worker play execute the command to join the cluster 
-  * Advanced (optional) extend the playbook to add new VM workers on the existing running cluster
+  * Advanced (optional) create a new playbook to: 
+    + create a new worker VM 
+    + add new VM workers on the existing running cluster
 
-    
+
 When you have your playbooks, ready execute the Docker swarm setup playbook.  Note if you have problems with 
 initializing the cluster on the master node  or joining the cluster on the workers you may need to open all TCP traffic 
 between the VMs of the cluster.
