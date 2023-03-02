@@ -1,0 +1,22 @@
+---
+- hosts: web-server1
+  become: true
+  tasks:
+    - ansible.builtin.package:
+        name: apache2
+        state: present
+
+    - ansible.builtin.service:
+        name: apache2
+        state: started
+
+- hosts: web-server2
+  become: true
+  tasks:
+     - ansible.builtin.package:
+         name: nginx
+         state: present
+
+     - ansible.builtin.service:
+         name: nginx
+         state: started

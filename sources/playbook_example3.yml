@@ -1,0 +1,16 @@
+---
+- hosts: web-server1
+  tasks:
+    - name: generate secret
+      shell: date +%s | sha256sum | base64 | head -c 32 ; echo
+      register: command_output
+
+    - name:
+      debug:
+        msg: "Secret password is {{ command_output.stdout }}"
+
+- hosts: web-server2
+  tasks:
+    - name: print paswd
+      debug:
+        msg: "Secret password is {{ command_output.stdout }}"
