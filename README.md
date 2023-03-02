@@ -125,7 +125,7 @@ Here is a break-down  of Ansible the command:
 
 
 ## Controlling Hosts
-Start 2 t2.small Ubuntu Linux VMs and allow all inbound traffic in the security groups.
+Start 2 t2.micro Ubuntu Linux VMs and allow all inbound traffic in the security groups.
 
 ---
 
