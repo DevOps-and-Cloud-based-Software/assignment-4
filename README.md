@@ -2,11 +2,10 @@
 
 # Introduction
 
-You will learn how to use Ansible to deploy and configure software on multiple 
-remote hosts, and how to adapt an application in a Docker Swarm cluster at runtime. 
-In this assignment, you will create several playbooks and use Ansible to set up and 
-configure a Docker swarm cluster on top of a set of VMs. You will also use the deployed
-Docker swarm cluster to practice the service autoscaling. 
+You will learn how to use Ansible to deploy and configure software on multiple remote hosts, and how to adapt an 
+application in a Docker Swarm cluster at runtime. 
+In this assignment, you will create several playbooks and use Ansible to set up and configure a Docker swarm cluster on 
+top of a set of VMs. You will also use the deployed Docker swarm cluster to practice the service scaling. 
 
 
 # Reporting and Assessment
@@ -16,39 +15,54 @@ Docker swarm cluster to practice the service autoscaling.
 At the end of this assignment, you (individually) should:
 
   * Create playbooks, using the information from this tutorial, that will: 
-    + Install and configure a Docker swarm cluster;
+    + Install and configure a Docker swarm cluster
+    + Perform a benchmark and take measurements 
+  * Advanced (optional) create a new playbook to:
+    + create a new worker VM 
+    + add new VM workers on the existing running cluster
    
-  * Write a short report (max 4 pages), which should include a GitHub link containing the created playbooks in YAML format
+  * Write a short report (max 5 pages), which should include a GitHub link containing the created playbooks in YAML format
    
-  * Report the results of the following tasks, e.g., for each of the steps and/or performance measurement, etc. 
-    + Install and configure a Docker swarm cluster; 
-    + Stress test a simple Nginx server with 1,2,4 and 8 instances and report the results;
-    
-  * Answer all self-study questions
+  * Report the results of the following tasks:
+    + Install and configure a Docker swarm cluster
+    + Benchmark and take measurements from a simple Nginx server with 1,2,4 and 8 instances and report the results
+  * Answer all questions (see [Questions](#questions))
 
 ---
 
  **IMPORTANT**
 
- Do not add your playbooks to your PDF report! Name your playbook 'configure-cluster.yml'
+ Do not add your playbooks to your PDF report! Keep the playbook names 'configure-cluster.yml' and 'benchmark-cluster.yml'
 
 ---
 
-## Self-study questions
-
-1. Discuss how Ansible can be used during the DevOps lifecycle, e.g., which stages? What are the advantages, alternatives of Ansible?
-2. Can you use Ansible with Azure? Is it essential to use Azure DevOps with Ansible?
 
 ## Assessment  
 
-If your Ansible files perform the steps defined above, and you have performed the stress 
-test you will receive 60%; your report will determine the rest of 40%.
+If your Ansible files perform the steps defined above, and you have performed the benchmark test you will receive 60%:
+ * 35% will be given for the installation and configure for Docker swarm
+ * 25% will be given for the benchmark and measurements, including the reported graph which mast be a histogram where in the x-axis you will have the number of instances and in the y-axis the 'Req/Sec' 
 
-To be given a grade, you must submit the following:
+Your report will determine the rest of 40%
+
+
+ 
+
+---
+
+ **IMPORTANT**
+
+ To be given a grade, you must submit the following:
 
  * Written report (see above for details)
- * GitHub link  containing your Ansible Playbooks 
- 
+ * GitHub link  containing your Ansible Playbooks
+
+ **Do not add your code in Canvas or in your report.**
+
+ **All links such as Git must be accessible from the day of submission and onwards.**
+
+
+---
 
 
 # Background
@@ -71,8 +85,9 @@ Ansible uses the following terms:
 
 You can find a short technical explanation here [https://www.youtube.com/watch?v=fHO1X93e4WA](https://www.youtube.com/watch?v=fHO1X93e4WA)
 
-
-* Docker Swarm: Container-orchestration, https://docs.docker.com/engine/swarm//.
+## Docker Swarm
+Docker is a tool used to automate the deployment of an application as a lightweight container so that the application.
+Swarm Mode is Docker’s built-in orchestration system for scaling containers across a cluster. 
 
 
 # Prepare your Development Environment 
@@ -124,7 +139,7 @@ Here is a break-down  of Ansible the command:
 
 
 ## Controlling Hosts
-Start 2 t2.micro Ubuntu Linux VMs and allow all inbound traffic in the security groups.
+Start 2 t2.micro Ubuntu Linux VMs and **allow all inbound traffic** in the security groups.
 
 ---
 
@@ -152,7 +167,7 @@ The first heading in brackets is a group name. You can have more than one group 
 and decide what systems you are controlling at what times and for what purpose. So, in this case, we only have a 
 specified [aws] group. 
 
-To assign variables to hosts, you can use the [aws:vars]  group variables. In this case, we set the VMs username and the 
+To assign variables to hosts, you can use the [aws:vars] group variables. In this case, we set the VMs username and the 
 location of the key. For more information on inventories see here: 
 https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html
 
@@ -244,14 +259,15 @@ ec2-54-91-92-164.compute-1.amazonaws.com : ok=2    changed=0    unreachable=0   
 
 In this output you can see:
 
-* PLAY [all]: The name of the play
+* PLAY [all]: The group of host the play will run.
 * TASK [Gathering Facts]: The Gather Facts task runs implicitly. By default, Ansible gathers information about your inventory that it can use in the playbook.
-* TASK [ansible.builtin.package]: The name of the task 
+* TASK [ansible.builtin.package]: The name the of module to run the task.
 * ok: [ec2-54-90-167-82.compute-1.amazonaws.com], ok: [ec2-54-91-92-164.compute-1.amazonaws.com]The status of each task. Each task has a status of ok which means it ran successfully.
 * PLAY RECAP : The play recap that summarizes results of all tasks in the playbook per managed node. In this example, there are two tasks so ok=2 indicates that each task ran successfully.
 
 
 ### Execute plays on different hosts
+
 If we want to execute different plays on different hosts, if for example, we need to install Apache server on one host 
 and Nginx server on another we need to specify that in the playbook by setting the - hosts: web-server1 
 
@@ -262,33 +278,6 @@ Change the hostnames in the file with the names of your VMs.
 
 In the control node create the following playbook: 
 [playbook_example2.yml](sources/playbook_example2.yml)
-
-
-If we execute:
-```
-ansible-playbook -i aws_hosts1 playbook_example2.yml
-```
-
-We get this output:
-
-```commandline
-[WARNING]: Could not match supplied host pattern, ignoring: web-server1
-
-PLAY [web-server1] *******************************************************************************************************************
-skipping: no hosts matched
-[WARNING]: Could not match supplied host pattern, ignoring: web-server2
-
-PLAY [web-server2] *******************************************************************************************************************
-skipping: no hosts matched
-
-PLAY RECAP ***************************************************************************************************************************
-```
-
-If we open a browser to **[web-server1]** Apache is not running. The same is true for  **[web-server2]**, Nginx is not 
-running. If we look at the output we'll notice the line:
-```
-skipping: no hosts matched
-```
 
 If we change the inventory and execute:
 
@@ -317,12 +306,13 @@ Sometimes it is necessary to pass variables between plays. Consider the followin
 playbook:
 [playbook_example3.yml](sources/playbook_example3.yml)
 
+
 if we execute:
 ```bash
 ansible-playbook -i aws_hosts2 playbook_example3.yml
 ```
 
-The play with the ‘web-server2’ hosts will fail. 
+The play with the 'web-server2' hosts will fail. 
 
 
 ```bash
@@ -406,24 +396,20 @@ ec2-54-90-167-82.compute-1.amazonaws.com : ok=5    changed=2    unreachable=0   
 ec2-54-91-92-164.compute-1.amazonaws.com : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
 ```
 
-we’ll see that the variable is now available to the 'web-server2' hosts as well. 
+we’ll see that the variable is now available to the 'web-server2' hosts as well. This is archived with the use of the 
+module 'add_host' which adds a host during the play execution. More infomrtaion about the module can be found here: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/add_host_module.html
+
 More information about variables and 'hostvars' can be found here:  https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#accessing-information-about-other-hosts-with-magic-variables.
 
 
 
 ## Exercises
 
-Before you start you'll need to install in your control node docker
-
---start-at-task="install packages"
-
-### Ansible
 Create a playbook that will install and configure a Docker swarm cluster
 
 Use the following inventory: [ansible_cluster_hosts](sources/ansible_cluster_hosts)
 And the following playbook: [configure-cluster.yml](sources/configure-cluster.yml)
 
-#### Process 
 Fill in the tasks in the playbook provided:
 
   * Go to task named 'docker swarm init' and save the output of the 'join_cmd' so it is accessible by the worker
@@ -433,8 +419,8 @@ Fill in the tasks in the playbook provided:
     + add new VM workers on the existing running cluster
 
 
-When you have your playbooks, ready execute the Docker swarm setup playbook.  Note if you have problems with 
-initializing the cluster on the master node  or joining the cluster on the workers you may need to open all TCP traffic 
+When you have your playbooks, ready execute the Docker swarm setup playbook.  Note, if you have problems with 
+initializing the cluster on the master node  or joining the cluster on the workers you may need to open all traffic 
 between the VMs of the cluster.
 
 ### Docker swarm scale benchmark 
@@ -445,7 +431,43 @@ Now we can benchmark Nginx. To do that, run the [benchmark-cluster.yml](sources/
 ```
 ansible-playbook -i ansible_cluster_hosts benchmark-cluster.yml
 ```
+Fill in the tasks in the playbook provided:
+ * Look in the end of the file and add your plays/tasks to repeat the process for 2, 4, and 8 instances 
+ * Record the results for the Avg 'Req/Sec'
+ * Create a histogram graph for your report where in the x-axis you will have the number of instances i.e. 1,2,4,8 and in the y-axis the 'Req/Sec' for each run. 
 
-Repeat the process for 2, 4, and 8 instances and record the results for the Avg 'Req/Sec' and create a histogram graph 
-for your report where in the x-axis you will have the number of instances i.e. 1,2,4,8 and in the y-axis the 'Req/Sec' 
-for each run. 
+
+## Questions
+
+### Ansible Play Failure 
+If we execute:
+```
+ansible-playbook -i aws_hosts1 playbook_example2.yml
+```
+
+We get this output:
+
+```commandline
+[WARNING]: Could not match supplied host pattern, ignoring: web-server1
+
+PLAY [web-server1] *******************************************************************************************************************
+skipping: no hosts matched
+[WARNING]: Could not match supplied host pattern, ignoring: web-server2
+
+PLAY [web-server2] *******************************************************************************************************************
+skipping: no hosts matched
+
+PLAY RECAP ***************************************************************************************************************************
+```
+
+Explain in a few lines why this play failed. 
+
+
+### Ansible Play Development 
+In [playbook_example2](sources/playbook_example2.yml) if we want to run only the 'start nginx' play how would achieve that?
+Provide the ansible-playbook command to do that. 
+
+
+### Ansible in DevOps
+Discuss how Ansible can be used during the DevOps lifecycle, e.g., which stages? What are the advantages, alternatives of Ansible?
+

@@ -2,21 +2,25 @@
 - hosts: web-server1
   become: true
   tasks:
-    - ansible.builtin.package:
+    - name: install apache2
+      ansible.builtin.package:
         name: apache2
         state: present
 
-    - ansible.builtin.service:
+    - name: start apache2
+      ansible.builtin.service:
         name: apache2
         state: started
 
 - hosts: web-server2
   become: true
   tasks:
+     - name: install nginx
      - ansible.builtin.package:
          name: nginx
          state: present
 
-     - ansible.builtin.service:
+     - name: start nginx
+       ansible.builtin.service:
          name: nginx
          state: started
