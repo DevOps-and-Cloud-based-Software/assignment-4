@@ -6,6 +6,7 @@
                           set -o pipefail 
                           date +%s | sha256sum | base64 | head -c 32 ; echo
       register: command_output
+      changed_when: false
 
     - name: command_output
       ansible.builtin.debug:
