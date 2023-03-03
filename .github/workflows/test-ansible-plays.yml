@@ -5,21 +5,15 @@ on:
 
 jobs:
   build:
+    name: Ansible Lint
     runs-on: ubuntu-latest
-    steps:
-    - name: checkout repo
-      uses: actions/checkout@v2
-    - name: Lint Ansible Playbook
-      uses: ansible/ansible-lint-action@master
-      with:
-        targets: ""
 
-  test-ansible:
-    needs: build
-    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: ./.github/actions/ansible
-      with:
-        playbook: sources/playbook_example1.yml
-        inventory: localhost
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Run ansible-lint
+        uses: ansible/ansible-lint-action@main
+        with:
+          path: "sources/playbook_example1.yml"
