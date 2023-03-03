@@ -25,7 +25,7 @@ At the end of this assignment, you (individually) should:
    
   * Report the results of the following tasks:
     + Install and configure a Docker swarm cluster
-    + Benchmark and take measurements from a simple Nginx server with 1,2,4 and 8 instances and report the results
+    + Benchmark and take measurements from a simple Nginx server with 1,2,4 and 8 instances report and comment on the results
   * Answer all questions (see [Questions](#questions))
 
 ---
@@ -435,6 +435,7 @@ Fill in the tasks in the playbook provided:
  * Look in the end of the file and add your plays/tasks to repeat the process for 2, 4, and 8 instances 
  * Record the results for the Avg 'Req/Sec'
  * Create a histogram graph for your report where in the x-axis you will have the number of instances i.e. 1,2,4,8 and in the y-axis the 'Req/Sec' for each run. 
+ * Comment on the results do you get increased performance as you add more instances? If not explain why and how would you achieve more requests per second. 
 
 
 ## Questions
