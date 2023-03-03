@@ -21,5 +21,3 @@ jobs:
         uses: ansible/ansible-lint-action@main
         with:
           path: "sources/${{ matrix.ansible-files }}"
-          skip_list:
-            - '403'
