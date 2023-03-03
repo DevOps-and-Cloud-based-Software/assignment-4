@@ -6,7 +6,7 @@
       register: command_output
 
     - name: command_output
-      debug:
+      ansible.builtin.debug:
         msg: "Secret password is {{ command_output.stdout }}"
 
     - name: Add command_output to dummy host
@@ -15,11 +15,11 @@
         paswd: "{{ command_output.stdout }}"
 
     - name: print hostvars
-      debug:
+      ansible.builtin.debug:
         msg: "Secret password is {{ hostvars['command_output_holder']['paswd'] }}"
 
 - hosts: web-server2
   tasks:
     - name: print paswd
-      debug:
+      ansible.builtin.debug:
         msg: "paswd is {{ hostvars['command_output_holder']['paswd'] }}"

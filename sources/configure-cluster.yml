@@ -98,7 +98,7 @@
 - hosts: master
   tasks:
 
-    - debug:
+    - ansible.builtin.debug:
         msg: "docker swarm init  | grep 'docker swarm join --token'"
 
     - name: docker swarm init
@@ -112,7 +112,7 @@
 - hosts: worker
   tasks:
     - name: print join cmd
-      debug:
+      ansible.builtin.debug:
         msg: "[Worker] {{ hostvars['join_cmd_holder']['cmd'] }}"
 
     - name: join
@@ -127,7 +127,7 @@
       register: nodes_out
 
     - name: print nodes
-      debug:
+      ansible.builtin.debug:
         var: nodes_out
 
     - name: remove visualizer
@@ -141,5 +141,5 @@
       register: visualizer
 
     - name: print swarm_service
-      debug:
+      ansible.builtin.debug:
         var: visualizer

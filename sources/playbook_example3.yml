@@ -6,11 +6,11 @@
       register: command_output
 
     - name: print command_output
-      debug:
+      ansible.builtin.debug:
         msg: "Secret password is {{ command_output.stdout }}"
 
 - hosts: web-server2
   tasks:
     - name: print paswd
-      debug:
+      ansible.builtin.debug:
         msg: "Secret password is {{ command_output.stdout }}"
