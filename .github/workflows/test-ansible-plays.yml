@@ -20,4 +20,4 @@ jobs:
       - name: Run ansible-lint
         uses: ansible/ansible-lint-action@main
         with:
-          path: "sources/${{ matrix.ansible }}"
+          path: "sources/${{ matrix.ansible-files }}"
