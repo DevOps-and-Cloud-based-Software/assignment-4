@@ -5,7 +5,7 @@
       shell: date +%s | sha256sum | base64 | head -c 32 ; echo
       register: command_output
 
-    - name:
+    - name: command_output
       debug:
         msg: "Secret password is {{ command_output.stdout }}"
 
@@ -14,7 +14,7 @@
         name: "command_output_holder"
         paswd: "{{ command_output.stdout }}"
 
-    - name:
+    - name: print hostvars
       debug:
         msg: "Secret password is {{ hostvars['command_output_holder']['paswd'] }}"
 
