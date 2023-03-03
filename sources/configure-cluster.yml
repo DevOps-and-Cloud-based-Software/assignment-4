@@ -47,7 +47,7 @@
         update_cache: yes
       when: ansible_os_family == 'RedHat'
 
-    - shell: "echo $(lsb_release -cs)"
+    - ansible.builtin.shell: "echo $(lsb_release -cs)"
       register: dist
 
 
@@ -69,7 +69,7 @@
       when: ansible_os_family == 'RedHat'
 
 
-    - shell: "dpkg --configure -a"
+    - ansible.builtin.shell: "dpkg --configure -a"
       become: yes
 
 
@@ -91,7 +91,7 @@
     - ansible.builtin.command: docker run hello-world
       register: docker_output
 
-    - ansible.builtin.shell: "docker swarm leave --force"
+    - ansible.builtin.ansible.builtin.shell: "docker swarm leave --force"
       become: yes
       ignore_errors: yes
 
@@ -102,7 +102,7 @@
         msg: "docker swarm init  | grep 'docker swarm join --token'"
 
     - name: docker swarm init
-      ansible.builtin.shell: "docker swarm init | grep 'docker swarm join --token'"
+      ansible.builtin.ansible.builtin.shell: "docker swarm init | grep 'docker swarm join --token'"
       become: yes
       register: join_cmd
 

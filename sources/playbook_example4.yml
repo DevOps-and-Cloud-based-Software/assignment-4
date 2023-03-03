@@ -2,7 +2,7 @@
 - hosts: web-server1
   tasks:
     - name: generate secret
-      shell: date +%s | sha256sum | base64 | head -c 32 ; echo
+      ansible.builtin.shell: date +%s | sha256sum | base64 | head -c 32 ; echo
       register: command_output
 
     - name: command_output
