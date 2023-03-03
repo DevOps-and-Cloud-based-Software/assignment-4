@@ -2,24 +2,27 @@
 - hosts: web-server1
   tasks:
     - name: generate secret
-      shell: date +%s | sha256sum | base64 | head -c 32 ; echo
+      ansible.builtin.shell: set -o pipefail && date +%s | sha256sum | base64 | head -c 32 ; echo
       register: command_output
+      changed_when: false
+      args:
+        executable: /bin/bash
 
-    - name:
-      debug:
+    - name: command_output
+      ansible.builtin.debug:
         msg: "Secret password is {{ command_output.stdout }}"
 
     - name: Add command_output to dummy host
-      add_host:
+      ansible.builtin.add_host:
         name: "command_output_holder"
         paswd: "{{ command_output.stdout }}"
 
-    - name:
-      debug:
+    - name: print hostvars
+      ansible.builtin.debug:
         msg: "Secret password is {{ hostvars['command_output_holder']['paswd'] }}"
 
 - hosts: web-server2
   tasks:
     - name: print paswd
-      debug:
+      ansible.builtin.debug:
         msg: "paswd is {{ hostvars['command_output_holder']['paswd'] }}"

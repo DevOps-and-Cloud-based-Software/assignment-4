@@ -38,7 +38,7 @@
       register: wrk_output
 
     - name:
-      debug:
+      ansible.builtin.debug:
         msg: '{{ wrk_output.stdout_lines | select("search", "Req/Sec") }}'
 
 
