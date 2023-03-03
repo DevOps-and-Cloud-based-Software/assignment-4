@@ -1,9 +1,10 @@
 ---
-- hosts: localhost
+- hosts: web-server1
   tasks:
     - name: generate secret
-      ansible.builtin.shell: date +%s | sha256sum | base64 | head -c 32 ; echo
-
+      ansible.builtin.shell: set -o pipefail && date +%s | sha256sum | base64 | head -c 32 ; echo
+      args:
+        executable: /bin/bash
       register: command_output
       changed_when: false
 
@@ -11,7 +12,7 @@
       ansible.builtin.debug:
         msg: "Secret password is {{ command_output.stdout }}"
 
-- hosts: localhost
+- hosts: web-server2
   tasks:
     - name: print paswd
       ansible.builtin.debug:
