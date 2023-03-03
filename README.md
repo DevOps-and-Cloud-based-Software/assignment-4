@@ -86,7 +86,7 @@ Ansible uses the following terms:
 You can find a short technical explanation here [https://www.youtube.com/watch?v=fHO1X93e4WA](https://www.youtube.com/watch?v=fHO1X93e4WA)
 
 ## Docker Swarm
-Docker is a tool used to automate the deployment of an application as a lightweight container so that the application.
+Docker is a tool used to automate the deployment of an application as a lightweight container so that the application can run in different environments.
 Swarm Mode is Docker’s built-in orchestration system for scaling containers across a cluster. 
 
 
@@ -288,7 +288,7 @@ ansible-playbook -i aws_hosts2 playbook_example2.yml
 If we open a browser to, **[web-server1]** and **[web-server2]** that we set in the inventory files we should see Apache 
 and Nginx running.
 
-If you cannot connect check the VMs' inbound rules in its Security Groups. 
+If you cannot connect, verify that you are using HTTP, and check the VMs' inbound rules in its Security Groups. 
 
 
 Make sure to stop the servers:
