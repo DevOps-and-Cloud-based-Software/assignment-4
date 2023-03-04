@@ -91,7 +91,7 @@
     - ansible.builtin.command: docker run hello-world
       register: docker_output
 
-    - ansible.builtin.ansible.builtin.shell: "docker swarm leave --force"
+    - ansible.builtin.shell: "docker swarm leave --force"
       become: yes
       ignore_errors: yes
 
@@ -102,7 +102,7 @@
         msg: "docker swarm init  | grep 'docker swarm join --token'"
 
     - name: docker swarm init
-      ansible.builtin.ansible.builtin.shell: "docker swarm init | grep 'docker swarm join --token'"
+      ansible.builtin.shell: "docker swarm init | grep 'docker swarm join --token'"
       become: yes
       register: join_cmd
 
