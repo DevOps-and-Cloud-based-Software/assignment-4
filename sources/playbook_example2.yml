@@ -1,16 +1,17 @@
 ---
 - hosts: all
   become: true
+  name: example2
   tasks:
 
     - name: update Debian
       ansible.builtin.apt:
-        update_cache: yes
+        update_cache: true
       when: ansible_os_family == 'Debian'
 
     - name: update RedHat
       ansible.builtin.yum:
-        update_cache: yes
+        update_cache: true
       when: ansible_os_family == 'RedHat'
 
 
