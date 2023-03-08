@@ -1,8 +1,8 @@
 ---
-- hosts: cluster
-  gather_facts: yes
-  become: yes
+- hosts: all
+  become: true
   tasks:
+
     - name: update Debian
       ansible.builtin.apt:
         update_cache: yes
@@ -13,6 +13,10 @@
         update_cache: yes
       when: ansible_os_family == 'RedHat'
 
+- hosts: cluster
+  gather_facts: yes
+  become: yes
+  tasks:
     - ansible.builtin.package:
         name:
             - docker
