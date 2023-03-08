@@ -1,6 +1,16 @@
 - hosts: all
   become: true
   tasks:
+    - name: update Debian
+      ansible.builtin.apt:
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+
+    - name: update RedHat
+      ansible.builtin.yum:
+        update_cache: yes
+      when: ansible_os_family == 'RedHat'
+
     - name: install python
       ansible.builtin.package:
         name: python3
