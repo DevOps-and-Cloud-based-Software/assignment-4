@@ -17,6 +17,7 @@
 
 - hosts: web-server1
   become: true
+  name: example2-1
   tasks:
     - name: Install apache2
       ansible.builtin.package:
@@ -30,6 +31,7 @@
 
 - hosts: web-server2
   become: true
+  name: example2-2
   tasks:
     - name: Install nginx
       ansible.builtin.package:
