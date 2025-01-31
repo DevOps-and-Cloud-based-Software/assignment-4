@@ -1,5 +1,5 @@
 - hosts: all
-  name: example1
+  name: Example1
   become: true
   tasks:
     - name: Update Debian

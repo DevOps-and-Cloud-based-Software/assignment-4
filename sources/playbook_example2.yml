@@ -1,7 +1,7 @@
 ---
 - hosts: all
   become: true
-  name: example2
+  name: Example2
   tasks:
 
     - name: Update Debian
@@ -17,7 +17,7 @@
 
 - hosts: web-server1
   become: true
-  name: example2-1
+  name: Example2-1
   tasks:
     - name: Install apache2
       ansible.builtin.package:
@@ -31,7 +31,7 @@
 
 - hosts: web-server2
   become: true
-  name: example2-2
+  name: Example2-2
   tasks:
     - name: Install nginx
       ansible.builtin.package:
