@@ -1,15 +1,15 @@
 ---
 - hosts: all
   become: true
-  name: example2
+  name: Example2
   tasks:
 
-    - name: update Debian
+    - name: Update Debian
       ansible.builtin.apt:
         update_cache: true
       when: ansible_os_family == 'Debian'
 
-    - name: update RedHat
+    - name: Update RedHat
       ansible.builtin.yum:
         update_cache: true
       when: ansible_os_family == 'RedHat'
@@ -17,26 +17,28 @@
 
 - hosts: web-server1
   become: true
+  name: Example2-1
   tasks:
-    - name: install apache2
+    - name: Install apache2
       ansible.builtin.package:
         name: apache2
         state: present
 
-    - name: start apache2
+    - name: Start apache2
       ansible.builtin.service:
         name: apache2
         state: started
 
 - hosts: web-server2
   become: true
+  name: Example2-2
   tasks:
-    - name: install nginx
+    - name: Install nginx
       ansible.builtin.package:
         name: nginx
         state: present
 
-    - name: start nginx
+    - name: Start nginx
       ansible.builtin.service:
         name: nginx
         state: started
