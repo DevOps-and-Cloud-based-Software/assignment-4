@@ -2,9 +2,9 @@
 
 # Introduction
 
-You will learn how to use Ansible to deploy and configure software on multiple remote hosts, and how to adapt an 
-application in a Docker Swarm cluster at runtime. 
-In this assignment, you will create several playbooks and use Ansible to set up and configure a Docker swarm cluster on 
+You will learn how to use Ansible to deploy and configure software on multiple remote hosts, and how to adapt an
+application in a Docker Swarm cluster at runtime.
+In this assignment, you will create several playbooks and use Ansible to set up and configure a Docker swarm cluster on
 top of a set of VMs. You will also use the deployed Docker swarm cluster to practice the service scaling.
 
 # Background
@@ -376,7 +376,7 @@ ansible-playbook -i ansible_cluster_hosts benchmark-cluster.yml
 Fill in the tasks in the playbook provided:
  * Look in the end of the file and add your plays/tasks to repeat the process for 2, 4, and 8 instances 
  * Record the results for the Avg 'Req/Sec'
- * Create a histogram graph for your report where in the x-axis you will have the number of instances i.e. 1,2,4,8 and in the y-axis the 'Req/Sec' for each run. 
+ * Create a histogram graph where in the x-axis you will have the number of instances i.e. 1,2,4,8 and in the y-axis the 'Req/Sec' for each run. 
  * Comment on the results do you get increased performance as you add more instances? If not explain why and how would you achieve more requests per second. 
 
 
