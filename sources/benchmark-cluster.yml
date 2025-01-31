@@ -3,12 +3,12 @@
   gather_facts: yes
   become: yes
   tasks:
-    - name: update Debian
+    - name: Update Debian
       ansible.builtin.apt:
         update_cache: yes
       when: ansible_os_family == 'Debian'
 
-    - name: update RedHat
+    - name: Update RedHat
       ansible.builtin.yum:
         update_cache: yes
       when: ansible_os_family == 'RedHat'
