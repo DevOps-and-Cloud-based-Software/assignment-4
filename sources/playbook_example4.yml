@@ -23,6 +23,7 @@
         msg: "Secret password is {{ hostvars['command_output_holder']['paswd'] }}"
 
 - hosts: web-server2
+  name: Example4-2
   tasks:
     - name: Print paswd
       ansible.builtin.debug:
