@@ -9,13 +9,13 @@
       register: command_output
       changed_when: false
 
-    - name: Print command_output
+    - name: Print command output
       ansible.builtin.debug:
         msg: "Secret password is {{ command_output.stdout }}"
 
 - hosts: web-server2
   name: Example3-2
   tasks:
-    - name: Print paswd
+    - name: Print password
       ansible.builtin.debug:
         msg: "Secret password is {{ command_output.stdout }}"
