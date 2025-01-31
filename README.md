@@ -5,65 +5,7 @@
 You will learn how to use Ansible to deploy and configure software on multiple remote hosts, and how to adapt an 
 application in a Docker Swarm cluster at runtime. 
 In this assignment, you will create several playbooks and use Ansible to set up and configure a Docker swarm cluster on 
-top of a set of VMs. You will also use the deployed Docker swarm cluster to practice the service scaling. 
-
-
-# Reporting and Assessment
-
-## Reporting
-
-At the end of this assignment, you (individually) should:
-
-  * Create playbooks, using the information from this tutorial, that will: 
-    + Install and configure a Docker swarm cluster
-    + Perform a benchmark and take measurements 
-  * Advanced (optional) create a new playbook to:
-    + create a new worker VM 
-    + add new VM workers on the existing running cluster
-   
-  * Write a short report (max 5 pages), which should include a GitHub link containing the created playbooks in YAML format
-   
-  * Report the results of the following tasks:
-    + Install and configure a Docker swarm cluster
-    + Benchmark and take measurements from a simple Nginx server with 1,2,4 and 8 instances report and comment on the results
-  * Answer all questions (see [Questions](#questions))
-
----
-
- **IMPORTANT**
-
- Do not add your playbooks to your PDF report! Keep the playbook names 'configure-cluster.yml' and 'benchmark-cluster.yml'
-
----
-
-
-## Assessment  
-
-If your Ansible files perform the steps defined above, and you have performed the benchmark test you will receive 60%:
- * 35% will be given for the installation and configure for Docker swarm
- * 25% will be given for the benchmark and measurements, including the reported graph which mast be a histogram where in the x-axis you will have the number of instances and in the y-axis the 'Req/Sec' 
-
-Your report will determine the rest of 40%
-
-
- 
-
----
-
- **IMPORTANT**
-
- To be given a grade, you must submit the following:
-
- * Written report (see above for details)
- * GitHub link  containing your Ansible Playbooks
-
- **Do not add your code in Canvas or in your report.**
-
- **All links such as Git must be accessible from the day of submission and onwards.**
-
-
----
-
+top of a set of VMs. You will also use the deployed Docker swarm cluster to practice the service scaling.
 
 # Background
 
