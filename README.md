@@ -1,5 +1,5 @@
 # DevOps and Cloud Based Software  
-## Lab 04 Software deployment and runtime adaptation (Ansible and Docker Swarm)
+## Lab 1-4: Software deployment and runtime adaptation (Ansible and Docker Swarm)
 University of Amsterdam
 
 # Introduction
@@ -414,5 +414,5 @@ Provide the ansible-playbook command to do that.
 
 
 ### Ansible in DevOps
-Discuss how Ansible can be used during the DevOps lifecycle, e.g., which stages? What are the advantages, alternatives of Ansible?
+Discuss how Ansible can be used during the DevOps lifecycle, e.g., which stages? What are the advantages and alternatives of Ansible?
 
