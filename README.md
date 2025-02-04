@@ -1,4 +1,6 @@
-% Software deployment and runtime adaptation (Ansible and Docker Swarm)
+# DevOps and Cloud Based Software  
+## Lab 04 Software deployment and runtime adaptation (Ansible and Docker Swarm)
+University of Amsterdam
 
 # Introduction
 
@@ -11,8 +13,8 @@ top of a set of VMs. You will also use the deployed Docker swarm cluster to prac
 
 ## Ansible
 
-Ansible is an open source, command-line automation software that is typically used to configure systems, deploy software, and orchestrate advanced 
-workflows to support application deployment, system updates. 
+Ansible is an open-source, command-line automation software that is typically used to configure systems, deploy software, and orchestrate advanced 
+workflows to support application deployment and system updates. 
 Ansible uses the following terms:
 
  * **Control node**: the machine where Ansible is installed. It manages the execution of the Playbook. It can be any machine on the internet
@@ -110,7 +112,7 @@ and decide what systems you are controlling at what times and for what purpose. 
 specified [aws] group. 
 
 To assign variables to hosts, you can use the [aws:vars] group variables. In this case, we set the VMs username and the 
-location of the key. For more information on inventories see here: 
+location of the key. For more information on inventories, see here: 
 https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html
 
 Next, run:
@@ -227,7 +229,7 @@ If we change the inventory and execute:
 ansible-playbook -i aws_hosts2 playbook_example2.yml
 ```
 
-If we open a browser to, **[web-server1]** and **[web-server2]** that we set in the inventory files we should see Apache 
+If we open a browser to **[web-server1]** and **[web-server2]** that we set in the inventory files we should see Apache 
 and Nginx running.
 
 If you cannot connect, verify that you are using HTTP, and check the VMs' inbound rules in its Security Groups. 
