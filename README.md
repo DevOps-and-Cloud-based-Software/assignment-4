@@ -2,7 +2,7 @@
 ## Lab 1-4: Software deployment and runtime adaptation (Ansible and Docker Swarm)
 University of Amsterdam
 
-# Introduction
+# Objectives
 
 You will learn how to use Ansible to deploy and configure software on multiple remote hosts, and how to adapt an
 application in a Docker Swarm cluster at runtime.
