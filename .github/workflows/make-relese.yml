@@ -6,7 +6,7 @@ on:
       - '*'
 env:
   GITHUB_TOKEN: ${{ github.token }}
-  URL: https://raw.githubusercontent.com/DevOps-and-Cloud-based-Software/week4/${{ github.ref_name }}
+  URL: https://raw.githubusercontent.com/DevOps-and-Cloud-based-Software/assignment-4/${{ github.ref_name }}
 
 jobs:
   publish:
